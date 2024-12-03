@@ -293,86 +293,92 @@ class _MyHomePageState extends State<MyHomePage> {
 
                           // Second Tile in the row
                           Expanded(
-                            child: ClipPath(
-                              clipper: TileParallelogramClipper(radius: 20.0),
-                              child: Stack(
-                                children: [
-                                  Positioned.fill(
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                                      child: Container(
-                                        color: Colors.black.withOpacity(0.2),
+                            child: MediaQuery.removePadding(
+                              context: context,
+                              removeTop: true,
+                              child: Container(
+                                child: ClipPath(
+                                  clipper: TileParallelogramClipper(radius: 20.0),
+                                  child: Stack(
+                                    children: [
+                                      Positioned.fill(
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                          child: Container(
+                                            color: Colors.black.withOpacity(0.2),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  BackdropFilter(
-                                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                                    child: Container(
-                                      padding: EdgeInsets.all(12),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.topRight,
-                                            child: IconButton(
-                                              onPressed: () => _onHeartTapped(rowIndex),
-                                              icon: _heartSelected[rowIndex]
-                                                  ? ShaderMask(
-                                                shaderCallback: (bounds) => LinearGradient(
-                                                  colors: [
-                                                    Color(0xFF60efff),
-                                                    Color(0xFF0061ff),
-                                                  ],
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                ).createShader(bounds),
-                                                child: const Icon(
-                                                  Icons.favorite_border,
+                                      BackdropFilter(
+                                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                        child: Container(
+                                          padding: EdgeInsets.all(12),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topRight,
+                                                child: IconButton(
+                                                  onPressed: () => _onHeartTapped(rowIndex),
+                                                  icon: _heartSelected[rowIndex]
+                                                      ? ShaderMask(
+                                                    shaderCallback: (bounds) => LinearGradient(
+                                                      colors: [
+                                                        Color(0xFF60efff),
+                                                        Color(0xFF0061ff),
+                                                      ],
+                                                      begin: Alignment.topLeft,
+                                                      end: Alignment.bottomRight,
+                                                    ).createShader(bounds),
+                                                    child: const Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.white,
+                                                    ),
+                                                  )
+                                                      : const Icon(
+                                                    Icons.favorite_border,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 4),
+                                              Center(
+                                                child: Image.asset(
+                                                  'assets/img1.png',
+                                                  height: 100,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Road Bike',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.white70,
+                                                ),
+                                              ),
+                                              SizedBox(height: 4),
+                                              Text(
+                                                'PEUGEOT - LR01',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                 ),
-                                              )
-                                                  : const Icon(
-                                                Icons.favorite_border,
-                                                color: Colors.white,
                                               ),
-                                            ),
+                                              Text(
+                                                '\$1,999.99',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.white70,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(height: 4),
-                                          Center(
-                                            child: Image.asset(
-                                              'assets/img1.png',
-                                              height: 100,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Road Bike',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white70,
-                                            ),
-                                          ),
-                                          SizedBox(height: 4),
-                                          Text(
-                                            'PEUGEOT - LR01',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            '\$1,999.99',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white70,
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -533,7 +539,7 @@ class TileParallelogramClipper extends CustomClipper<Path> {
     final double height = size.height;
 
     path.moveTo(0, height * 0.2);
-    path.quadraticBezierTo(0, height * 0.2, 12, height * 0.2);
+    path.quadraticBezierTo(0, height * 0.1, 12, height*0.1);
 
     path.lineTo(width - 12, 0);
     path.quadraticBezierTo(width, 0, width, 12);
